@@ -3,15 +3,19 @@ var users = require('./users');
 var database = require('./db');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var cors = require('cors');
 
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8081;
 var db = database.connect;
 
+app.use(cors());
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
 }));
+
+app.disable('etag');
 
 app.get('/index', function(req,res){
     res.send('<h1>index page</h1>');
