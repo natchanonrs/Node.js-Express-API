@@ -33,12 +33,6 @@ app.get('/employees/:name', function(req,res){
     });
 });
 
-app.get('/employees/sort/name', function(req,res){
-    db.employees.find().sort({name: 1}, function(err, docs){
-    	res.json(docs);
-    });
-});
-
 app.post('/employees', function (req, res) {
     var json = req.body;
     db.employees.insert(json, function(err, docs){
