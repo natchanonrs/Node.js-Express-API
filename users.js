@@ -7,15 +7,6 @@ var users = [
         "email": "-",
         "job": "Pirate",
         "salary": "nothing"
-    },
-    {
-        "id": 2,
-        "name": "Anakin Skywalker",
-        "address": "Tatooine",
-        "phone": "-",
-        "email": "-",
-        "job": "Chosen one",
-        "salary": "nothing"
     }
 ];
 
