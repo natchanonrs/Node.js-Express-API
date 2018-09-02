@@ -2,10 +2,12 @@ var app = require('express')();
 var users = require('./users');
 var database = require('./db');
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
 var port = process.env.PORT || 8080;
 var db = database.connect;
 
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended:true
