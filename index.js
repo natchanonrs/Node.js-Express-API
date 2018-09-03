@@ -7,6 +7,7 @@ var cors = require('cors');
 
 var port = process.env.PORT || 8081;
 var db = database.connect;
+var OId = database.ObjectId;
 
 app.use(cors());
 app.use(morgan('combined'));
@@ -27,8 +28,8 @@ app.get('/employees', function(req,res){
     });
 });
 
-app.get('/employees/:name', function(req,res){
-    db.employees.findOne({name: req.params.name}, function(err, docs){
+app.get('/employees/:id', function(req,res){
+    db.employees.findOne({_id: OId(req.params.id)}, function(err, docs){
     	res.json(docs);
     });
 });
@@ -40,31 +41,32 @@ app.post('/employees', function (req, res) {
     });
 });
 
-app.put('/employees', function (req, res) {
+app.put('/employees/:id', function (req, res) {
     var json = req.body;
+    var id = req.params.id;
     db.employees.findAndModify({
-    	query: {name: json.name},
+    	query: {_id: OId(id)},
 	update: {$set: json},
 	new: true
     }, function(err, docs){
-    	res.send('Update ' + json.name + ' Completed!');
+    	res.send('Update ' + id + ' Completed!');
     });
 });
 
-app.delete('/employees', function (req, res) {
-    var json = req.body;
+app.delete('/employees/:id', function (req, res) {
+    var id = req.params.id;
     //soft delete
-    db.employees.findAndModify({
-    	query: {name: json.name},
-	update: {$set: {deleted:true}},
-	new: true
-    }, function(err, docs){
-    	res.send('Update ' + json.name + ' Completed!');
-    });
-    //hard delete
-    //db.employees.remove({name:json.name}, function(err, docs){
-    //	res.send('Delete '+json.name+' Complete');
+    //db.employees.findAndModify({
+    //	query: {name: name},
+	//update: {$set: {deleted:true}},
+	//new: true
+    //}, function(err, docs){
+    //	res.send('Update ' + name + ' Completed!');
     //});
+    //hard delete
+    db.employees.remove({_id: OId(id)}, function(err, docs){
+    	res.send('Delete '+ id +' Complete');
+    });
 });
 
 app.listen(port, function(){

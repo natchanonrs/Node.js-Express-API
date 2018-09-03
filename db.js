@@ -5,7 +5,10 @@ var collections = ['employees'];
 
 var connect = mongojs(databaseUrl, collections);
 
+var ObjectId = mongojs.ObjectId;
+
 module.exports = {
-    connect: connect
+    connect: connect,
+    ObjectId: ObjectId
 };
 
