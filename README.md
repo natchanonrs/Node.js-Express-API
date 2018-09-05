@@ -2,7 +2,7 @@
 
 RESTful API for CRUD operation using Node.js, Express framwork and MongoDB.
 
-##Prerequisites
+## Prerequisites
 
 Node.js and npm
 ```
@@ -45,3 +45,11 @@ provide RESTful API functions:
 * POST /employees         create employee
 * PUT /employees/{id}     update employee data with id
 * DELETE /employees/{id}  delete employee with id
+
+## Built With
+Node.js package:
+* Express - Web framwork
+* Cors - Used to enable CORS
+* Body-parser - Parsing body html to json
+* Morgan - Logger
+* Mongojs - Used to connect to Mongodb server
